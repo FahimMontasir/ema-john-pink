@@ -1,7 +1,13 @@
 import { Button, Container } from '@material-ui/core';
 import React from 'react';
+import { useHistory } from 'react-router';
 
-const Review = ({ cart, removeItem }) => {
+const Review = ({ cart, removeItem, setCart }) => {
+  let history2 = useHistory()
+  const placeOrder = () => {
+    history2.push("/place")
+    setCart([])
+  }
   const tPay = cart.reduce((total, pd) => total + pd.price * pd.quantity, 0)
   const tAmount = cart.reduce((total, pd) => total + pd.quantity, 0)
   return (
@@ -11,7 +17,7 @@ const Review = ({ cart, removeItem }) => {
         <h3>Total quantity: x{tAmount}</h3>
         <h3>Total payable: ${tPay}</h3>
         <div style={{ textAlign: 'center' }}>
-          <Button variant="contained" color="secondary">Place Order</Button>
+          <Button onClick={placeOrder} variant="contained" color="secondary">Place Order</Button>
         </div>
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>

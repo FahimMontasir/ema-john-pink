@@ -13,6 +13,7 @@ import Camera from './components/Camera/Camera';
 import Laptop from './components/Laptop/Laptop';
 import Trending from './components/Trending/Trending';
 import Review from './components/Review/Review';
+import OrderPlaced from './components/OrderPlaced/OrderPlaced';
 const App = () => {
   const [cart, setCart] = useState([]);
   //to handle cart value
@@ -36,6 +37,8 @@ const App = () => {
     const RemovedCart = cart.filter(Rpd => Rpd.key !== pd.key);
     setCart(RemovedCart);
   }
+  //place order 
+
   return (
     <Router>
       <Navigation cart={cart}></Navigation>
@@ -59,7 +62,10 @@ const App = () => {
           <Laptop handleCart={handleCart}></Laptop>
         </Route>
         <Route path="/review">
-          <Review removeItem={removeItem} cart={cart}></Review>
+          <Review setCart={setCart} removeItem={removeItem} cart={cart}></Review>
+        </Route>
+        <Route path="/place">
+          <OrderPlaced></OrderPlaced>
         </Route>
         <Route exact path="/">
           <Trending handleCart={handleCart}></Trending>
